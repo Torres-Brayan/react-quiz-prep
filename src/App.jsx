@@ -1,8 +1,18 @@
-
-
+import Users from "./components/Users";
+import { useEffect, useState } from "react"
 
 function App() {
-  
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch('https://jsonplaceholder.typicode.com/users')
+      const data = await res.json()
+      setUsers(data)
+    }
+
+    getData()
+  }, [])
 
   // Instructions:
     // 1. Use a react hook to create some state called users with an initial value of an empty Array.
@@ -16,7 +26,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>See instructions commented out in App.jsx!</h1>
+      < Users users={users}/>
     </div>
   )
 }
